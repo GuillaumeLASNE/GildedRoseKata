@@ -1,5 +1,6 @@
 package com.gildedrose;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -22,4 +23,18 @@ public class GildedRoseTest {
         gildedRose.updateQuality();
         assertEquals(initialSellIn - 1, items[0].sellIn);
     }
+
+
+    @Test
+    @Ignore
+    public void quality_of_conjured_items_decrease_by_two_each_day() {
+        int initialQuality = 6;
+        Item conjuredManaCake = new Item("Conjured Mana Cake",3 ,initialQuality);
+        GildedRose gildedRose = new GildedRose(new Item[]{conjuredManaCake});
+        gildedRose.updateQuality();
+
+        assertEquals(initialQuality - 2, conjuredManaCake.quality);
+    }
+
+
 }
