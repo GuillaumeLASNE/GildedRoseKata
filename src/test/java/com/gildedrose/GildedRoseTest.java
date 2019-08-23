@@ -79,6 +79,14 @@ public class GildedRoseTest {
         assertEquals(initialQuality + 1, agedBrie.quality);
     }
 
+    @Test
+    public void aged_brie_quality_increase_by_two_on_update_after_sell_by_date() {
+        int initialQuality = 5;
+        Item agedBrie = new Item(GildedRose.AGED_BRIE, -5, initialQuality);
+        getGildedRose().updateOneItemQuality(agedBrie);
+        assertEquals(initialQuality + 2, agedBrie.quality);
+    }
+
     private GildedRose getGildedRose() {
         return new GildedRose(null);
     }
