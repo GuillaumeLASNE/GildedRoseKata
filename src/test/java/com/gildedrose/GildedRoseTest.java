@@ -36,9 +36,16 @@ public class GildedRoseTest {
     @Test
     public void sell_in_decrease_by_one_at_each_update_for_not_sulfuras_item() {
         int initialSellIn = 10;
-        Item notSulfurasItem = new Item("not-sulfuras item", initialSellIn, 0);
-        getGildedRose().updateOneItemQuality(notSulfurasItem);
-        assertEquals(initialSellIn - 1, notSulfurasItem.sellIn);
+        Item[] items = new Item[]{
+                new Item(GildedRose.AGED_BRIE, initialSellIn, 5),
+                new Item(GildedRose.BACKSTAGE_PASSES, initialSellIn, 5),
+                new Item(BASIC_ITEM, initialSellIn, 5)
+        };
+        GildedRose gildedRose = new GildedRose(items);
+        gildedRose.updateQuality();
+        for(Item currentItem : items) {
+            assertEquals(initialSellIn - 1, currentItem.sellIn);
+        }
     }
 
     @Test
