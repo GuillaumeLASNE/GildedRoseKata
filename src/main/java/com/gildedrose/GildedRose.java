@@ -43,6 +43,10 @@ class GildedRose {
             increaseQuality(item);
         } else {
             decreaseQuality(item);
+            if (item.sellIn < 0) {
+                decreaseQuality(item);
+            }
+
         }
 
 
@@ -51,8 +55,6 @@ class GildedRose {
                 setQualityToMinimum(item);
             } else if (item.name.equals(AGED_BRIE)) {
                 increaseQuality(item);
-            } else{
-                decreaseQuality(item);
             }
         }
     }
