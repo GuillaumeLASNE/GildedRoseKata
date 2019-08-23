@@ -5,7 +5,7 @@ class GildedRose {
     private static final String AGED_BRIE = "Aged Brie";
     private static final String BACKSTAGE_PASSES = "Backstage passes to a TAFKAL80ETC concert";
     private static final int MAXIMUM_QUALITY = 50;
-    private static final int MINIMUM_QUALITY = 0;
+    static final int MINIMUM_QUALITY = 0;
     private static final int TEN_DAYS_LEFT_UNTIL_CONCERT = 10;
     private static final int FIVE_DAYS_LEFT_UNTIL_CONCERT = 5;
 

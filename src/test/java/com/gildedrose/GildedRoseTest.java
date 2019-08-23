@@ -35,12 +35,38 @@ public class GildedRoseTest {
     }
 
     @Test
-    public void sell_in_decrease_by_one_at_each_update_for_basic_item() {
+    public void sell_in_decrease_by_one_at_each_update_for_not_sulfuras_item() {
         int initialSellIn = 10;
-        Item basicItem = new Item("basic item", initialSellIn, 0);
+        Item notSulfurasItem = new Item("not-sulfuras item", initialSellIn, 0);
+        GildedRose gildedRose = new GildedRose(null);
+        gildedRose.updateOneItemQuality(notSulfurasItem);
+        assertEquals(initialSellIn - 1, notSulfurasItem.sellIn);
+    }
+
+    @Test
+    public void quality_decrease_by_one_at_each_update_until_sell_in_reaches_zero() {
+        int initialQuality = 5;
+        Item basicItem = new Item("basic item", 1, initialQuality);
         GildedRose gildedRose = new GildedRose(null);
         gildedRose.updateOneItemQuality(basicItem);
-        assertEquals(initialSellIn - 1, basicItem.sellIn);
+        assertEquals(initialQuality - 1, basicItem.quality);
+    }
+
+    @Test
+    public void quality_decrease_by_two_at_each_update_when_sell_has_reached_zero() {
+        int initialQuality = 5;
+        Item basicItem = new Item("basic item", -1, initialQuality);
+        GildedRose gildedRose = new GildedRose(null);
+        gildedRose.updateOneItemQuality(basicItem);
+        assertEquals(initialQuality - 2, basicItem.quality);
+    }
+
+    @Test
+    public void quality_does_not_decrease_below_zero() {
+        Item anyItem = new Item("any item", -1, GildedRose.MINIMUM_QUALITY);
+        GildedRose gildedRose = new GildedRose(null);
+        gildedRose.updateOneItemQuality(anyItem);
+        assertEquals(GildedRose.MINIMUM_QUALITY, anyItem.quality);
     }
 
 
