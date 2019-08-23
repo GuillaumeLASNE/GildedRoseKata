@@ -5,6 +5,9 @@ class GildedRose {
     public static final String AGED_BRIE = "Aged Brie";
     public static final String BACKSTAGE_PASSES = "Backstage passes to a TAFKAL80ETC concert";
     public static final int MAXIMUM_QUALITY = 50;
+    public static final int MINIMUM_QUALITY = 0;
+    public static final int TEN_DAYS_LEFT_UNTIL_CONCERT = 10;
+    public static final int FIVE_DAYS_LEFT_UNTIL_CONCERT = 5;
     Item[] items;
 
     public GildedRose(Item[] items) {
@@ -21,48 +24,48 @@ class GildedRose {
         if (SULFURAS.equals(item.name)) {
             return;
         }
+
+        decreaseSellIn(item);
+
         if (item.name.equals(AGED_BRIE)) {
-            increaseQualitySafely(item);
+            increaseQuality(item);
         } else if (item.name.equals(BACKSTAGE_PASSES)) {
 
-            increaseQualitySafely(item);
+            increaseQuality(item);
 
-            if (item.sellIn < 11) {
-                increaseQualitySafely(item);
+            if (item.sellIn < TEN_DAYS_LEFT_UNTIL_CONCERT) {
+                increaseQuality(item);
             }
 
-            if (item.sellIn < 6) {
-                increaseQualitySafely(item);
+            if (item.sellIn < FIVE_DAYS_LEFT_UNTIL_CONCERT) {
+                increaseQuality(item);
             }
         } else {
-            if (item.quality > 0) {
-                decreaseQuality(item);
-            }
+            decreaseQuality(item);
         }
 
-        if (!item.name.equals(SULFURAS)) {
-            decreaseSellIn(item);
-        }
 
-        if (item.sellIn < 0) {
+        if (item.sellIn < MINIMUM_QUALITY) {
             if (item.name.equals(AGED_BRIE)) {
-                increaseQualitySafely(item);
+                increaseQuality(item);
             } else {
                 if (item.name.equals(BACKSTAGE_PASSES)) {
-                    setQualityToZero(item);
+                    setQualityToMinimum(item);
                 } else {
-                    if (item.quality > 0) {
-                        if (!item.name.equals(SULFURAS)) {
-                            decreaseQuality(item);
-                        }
-                    }
+                    decreaseQuality(item);
                 }
             }
         }
     }
 
-    private void setQualityToZero(Item item) {
-        item.quality = 0;
+    private void decreaseQuality(Item item) {
+        if (item.quality > MINIMUM_QUALITY) {
+            item.quality = item.quality - 1;
+        }
+    }
+
+    private void setQualityToMinimum(Item item) {
+        item.quality = MINIMUM_QUALITY;
     }
 
     private void decreaseSellIn(Item item) {
@@ -70,16 +73,9 @@ class GildedRose {
     }
 
     private void increaseQuality(Item item) {
-        item.quality = item.quality + 1;
-    }
-
-    private void increaseQualitySafely(Item item) {
         if (item.quality < MAXIMUM_QUALITY) {
-            increaseQuality(item);
+            item.quality = item.quality + 1;
         }
     }
 
-    private void decreaseQuality(Item item) {
-        item.quality = item.quality - 1;
-    }
 }
