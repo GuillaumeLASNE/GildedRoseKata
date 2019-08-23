@@ -27,9 +27,7 @@ class GildedRose {
 
         decreaseSellIn(item);
 
-        if (item.name.equals(AGED_BRIE)) {
-            increaseQuality(item);
-        } else if (item.name.equals(BACKSTAGE_PASSES)) {
+        if (item.name.equals(BACKSTAGE_PASSES)) {
 
             increaseQuality(item);
 
@@ -40,20 +38,20 @@ class GildedRose {
             if (item.sellIn < FIVE_DAYS_LEFT_UNTIL_CONCERT) {
                 increaseQuality(item);
             }
+        } else if (item.name.equals(AGED_BRIE)) {
+            increaseQuality(item);
         } else {
             decreaseQuality(item);
         }
 
 
         if (item.sellIn < MINIMUM_QUALITY) {
-            if (item.name.equals(AGED_BRIE)) {
+             if (item.name.equals(BACKSTAGE_PASSES)) {
+                setQualityToMinimum(item);
+            } else if (item.name.equals(AGED_BRIE)) {
                 increaseQuality(item);
-            } else {
-                if (item.name.equals(BACKSTAGE_PASSES)) {
-                    setQualityToMinimum(item);
-                } else {
-                    decreaseQuality(item);
-                }
+            } else{
+                decreaseQuality(item);
             }
         }
     }
