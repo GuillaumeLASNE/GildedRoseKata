@@ -16,8 +16,8 @@ class GildedRose {
     }
 
     public void updateQuality() {
-        for (int i = 0; i < items.length; i++) {
-            updateOneItemQuality(items[i]);
+        for (Item item : items) {
+            updateOneItemQuality(item);
         }
     }
 
@@ -46,7 +46,7 @@ class GildedRose {
         }
 
 
-        if (item.sellIn < MINIMUM_QUALITY) {
+        if (item.sellIn < 0) {
              if (item.name.equals(BACKSTAGE_PASSES)) {
                 setQualityToMinimum(item);
             } else if (item.name.equals(AGED_BRIE)) {

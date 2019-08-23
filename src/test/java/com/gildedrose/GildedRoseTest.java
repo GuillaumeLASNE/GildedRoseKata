@@ -10,20 +10,11 @@ public class GildedRoseTest {
     public static final int SULFURAS_QUALITY = 80;
 
     @Test
-    public void item_name_does_not_change_on_update() {
+    public void every_items_name_do_not_change_on_update() {
         Item[] items = new Item[] { new Item("foo", 0, 0) };
         GildedRose app = new GildedRose(items);
         app.updateQuality();
         assertEquals("foo", app.items[0].name);
-    }
-
-    @Test
-    public void sell_in_decrease_by_one_at_each_update_for_one_item() {
-        int initialSellIn = 10;
-        Item basicItem = new Item("basic item", initialSellIn, 0);
-        GildedRose gildedRose = new GildedRose(null);
-        gildedRose.updateOneItemQuality(basicItem);
-        assertEquals(initialSellIn - 1, basicItem.sellIn);
     }
 
     @Test
@@ -41,6 +32,15 @@ public class GildedRoseTest {
         GildedRose gildedRose = new GildedRose(null);
         gildedRose.updateOneItemQuality(sulfuras);
         assertEquals(initialSellIn, sulfuras.sellIn);
+    }
+
+    @Test
+    public void sell_in_decrease_by_one_at_each_update_for_basic_item() {
+        int initialSellIn = 10;
+        Item basicItem = new Item("basic item", initialSellIn, 0);
+        GildedRose gildedRose = new GildedRose(null);
+        gildedRose.updateOneItemQuality(basicItem);
+        assertEquals(initialSellIn - 1, basicItem.sellIn);
     }
 
 
