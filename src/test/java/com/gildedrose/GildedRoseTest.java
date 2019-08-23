@@ -18,10 +18,10 @@ public class GildedRoseTest {
     @Test
     public void sell_in_decrease_by_one_at_each_update_for_one_item() {
         int initialSellIn = 10;
-        Item[] items = new Item[] {new Item("test item", initialSellIn, 0)};
-        GildedRose gildedRose = new GildedRose(items);
-        gildedRose.updateQuality();
-        assertEquals(initialSellIn - 1, items[0].sellIn);
+        Item basicItem = new Item("basic item", initialSellIn, 0);
+        FakeGildedRose gildedRose = new FakeGildedRose(null);
+        gildedRose.updateOneItemQuality(basicItem);
+        assertEquals(initialSellIn - 1, basicItem.sellIn);
     }
 
 
@@ -36,5 +36,10 @@ public class GildedRoseTest {
         assertEquals(initialQuality - 2, conjuredManaCake.quality);
     }
 
+    private class FakeGildedRose extends GildedRose {
 
+        FakeGildedRose(Item[] items) {
+            super(items);
+        }
+    }
 }

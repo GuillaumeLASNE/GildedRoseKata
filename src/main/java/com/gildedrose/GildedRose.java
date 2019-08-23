@@ -1,13 +1,14 @@
 package com.gildedrose;
 
 class GildedRose {
-    public static final String SULFURAS = "Sulfuras, Hand of Ragnaros";
-    public static final String AGED_BRIE = "Aged Brie";
-    public static final String BACKSTAGE_PASSES = "Backstage passes to a TAFKAL80ETC concert";
-    public static final int MAXIMUM_QUALITY = 50;
-    public static final int MINIMUM_QUALITY = 0;
-    public static final int TEN_DAYS_LEFT_UNTIL_CONCERT = 10;
-    public static final int FIVE_DAYS_LEFT_UNTIL_CONCERT = 5;
+    private static final String SULFURAS = "Sulfuras, Hand of Ragnaros";
+    private static final String AGED_BRIE = "Aged Brie";
+    private static final String BACKSTAGE_PASSES = "Backstage passes to a TAFKAL80ETC concert";
+    private static final int MAXIMUM_QUALITY = 50;
+    private static final int MINIMUM_QUALITY = 0;
+    private static final int TEN_DAYS_LEFT_UNTIL_CONCERT = 10;
+    private static final int FIVE_DAYS_LEFT_UNTIL_CONCERT = 5;
+
     Item[] items;
 
     public GildedRose(Item[] items) {
@@ -20,7 +21,7 @@ class GildedRose {
         }
     }
 
-    private void updateOneItemQuality(Item item) {
+    protected void updateOneItemQuality(Item item) {
         if (SULFURAS.equals(item.name)) {
             return;
         }
