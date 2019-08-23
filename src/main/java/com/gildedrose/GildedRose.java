@@ -57,7 +57,7 @@ class GildedRose {
         }
     }
 
-    private void decreaseQuality(Item item) {
+    void decreaseQuality(Item item) {
         if (item.quality > MINIMUM_QUALITY) {
             item.quality = item.quality - 1;
         }

@@ -8,6 +8,7 @@ import static org.junit.Assert.assertEquals;
 public class GildedRoseTest {
 
     private static final int SULFURAS_QUALITY = 80;
+    private static final String BASIC_ITEM = "basic item";
 
     @Test
     public void every_items_name_do_not_change_on_update() {
@@ -43,24 +44,24 @@ public class GildedRoseTest {
     @Test
     public void quality_decrease_by_one_at_each_update_until_sell_in_reaches_zero() {
         int initialQuality = 5;
-        Item basicItem = new Item("basic item", 1, initialQuality);
+        Item basicItem = new Item(BASIC_ITEM, 1, initialQuality);
         getGildedRose().updateOneItemQuality(basicItem);
         assertEquals(initialQuality - 1, basicItem.quality);
     }
 
     @Test
-    public void quality_decrease_by_two_at_each_update_when_sell_in_has_reached_zero() {
+    public void quality_decrease_by_two_at_each_update_before_sell_by_date() {
         int initialQuality = 5;
-        Item basicItem = new Item("basic item", -1, initialQuality);
+        Item basicItem = new Item(BASIC_ITEM, -1, initialQuality);
         getGildedRose().updateOneItemQuality(basicItem);
         assertEquals(initialQuality - 2, basicItem.quality);
     }
 
     @Test
     public void quality_does_not_decrease_below_zero() {
-        Item anyItem = new Item("any item", -1, GildedRose.MINIMUM_QUALITY);
-        getGildedRose().updateOneItemQuality(anyItem);
-        assertEquals(GildedRose.MINIMUM_QUALITY, anyItem.quality);
+        Item basicItem = new Item(BASIC_ITEM, -1, GildedRose.MINIMUM_QUALITY);
+        getGildedRose().decreaseQuality(basicItem);
+        assertEquals(GildedRose.MINIMUM_QUALITY, basicItem.quality);
     }
 
     @Test
