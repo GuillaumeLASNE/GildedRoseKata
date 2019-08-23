@@ -21,20 +21,18 @@ class GildedRose {
         if (SULFURAS.equals(item.name)) {
             return;
         }
-        if (item.name.equals(AGED_BRIE)
-                || item.name.equals(BACKSTAGE_PASSES)) {
-            if (item.quality < MAXIMUM_QUALITY) {
-                increaseQuality(item);
+        if (item.name.equals(AGED_BRIE)) {
+            increaseQualitySafely(item);
+        } else if (item.name.equals(BACKSTAGE_PASSES)) {
 
-                if (item.name.equals(BACKSTAGE_PASSES)) {
-                    if (item.sellIn < 11) {
-                        increaseQualitySafely(item);
-                    }
+            increaseQualitySafely(item);
 
-                    if (item.sellIn < 6) {
-                        increaseQualitySafely(item);
-                    }
-                }
+            if (item.sellIn < 11) {
+                increaseQualitySafely(item);
+            }
+
+            if (item.sellIn < 6) {
+                increaseQualitySafely(item);
             }
         } else {
             if (item.quality > 0) {
