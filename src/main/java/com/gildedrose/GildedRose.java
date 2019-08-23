@@ -1,7 +1,7 @@
 package com.gildedrose;
 
 class GildedRose {
-    private static final String SULFURAS = "Sulfuras, Hand of Ragnaros";
+    static final String SULFURAS = "Sulfuras, Hand of Ragnaros";
     private static final String AGED_BRIE = "Aged Brie";
     private static final String BACKSTAGE_PASSES = "Backstage passes to a TAFKAL80ETC concert";
     private static final int MAXIMUM_QUALITY = 50;
@@ -21,7 +21,7 @@ class GildedRose {
         }
     }
 
-    protected void updateOneItemQuality(Item item) {
+    void updateOneItemQuality(Item item) {
         if (SULFURAS.equals(item.name)) {
             return;
         }

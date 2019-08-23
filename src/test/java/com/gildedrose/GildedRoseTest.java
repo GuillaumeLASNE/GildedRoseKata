@@ -7,6 +7,8 @@ import static org.junit.Assert.assertEquals;
 
 public class GildedRoseTest {
 
+    public static final int SULFURAS_QUALITY = 80;
+
     @Test
     public void item_name_does_not_change_on_update() {
         Item[] items = new Item[] { new Item("foo", 0, 0) };
@@ -19,10 +21,28 @@ public class GildedRoseTest {
     public void sell_in_decrease_by_one_at_each_update_for_one_item() {
         int initialSellIn = 10;
         Item basicItem = new Item("basic item", initialSellIn, 0);
-        FakeGildedRose gildedRose = new FakeGildedRose(null);
+        GildedRose gildedRose = new GildedRose(null);
         gildedRose.updateOneItemQuality(basicItem);
         assertEquals(initialSellIn - 1, basicItem.sellIn);
     }
+
+    @Test
+    public void sulfuras_item_quality_does_not_change_on_update() {
+        Item sulfuras = new Item(GildedRose.SULFURAS, 2, SULFURAS_QUALITY);
+        GildedRose gildedRose = new GildedRose(null);
+        gildedRose.updateOneItemQuality(sulfuras);
+        assertEquals(SULFURAS_QUALITY, sulfuras.quality);
+    }
+
+    @Test
+    public void sulfuras_item_sell_in_does_not_change_on_update() {
+        int initialSellIn = 2;
+        Item sulfuras = new Item(GildedRose.SULFURAS, initialSellIn, SULFURAS_QUALITY);
+        GildedRose gildedRose = new GildedRose(null);
+        gildedRose.updateOneItemQuality(sulfuras);
+        assertEquals(initialSellIn, sulfuras.sellIn);
+    }
+
 
 
     @Test
@@ -36,10 +56,4 @@ public class GildedRoseTest {
         assertEquals(initialQuality - 2, conjuredManaCake.quality);
     }
 
-    private class FakeGildedRose extends GildedRose {
-
-        FakeGildedRose(Item[] items) {
-            super(items);
-        }
-    }
 }
